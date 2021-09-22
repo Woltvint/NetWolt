@@ -197,7 +197,7 @@ namespace NetWolt
                 return output;
             }
         }
-        public List<int> getDisconectedClients()
+        public List<int> getDisconnectedClients()
         {
             lock (disconectedClientsLock)
             {
@@ -223,24 +223,24 @@ namespace NetWolt
             return output;
         }
 
-        public bool newCommands(int id)
+        public bool newCommands(int clientId)
         {
             lock (networkClients)
             {
-                return networkClients[id].receivedCommands.Count > 0;
+                return networkClients[clientId].receivedCommands.Count > 0;
             }
         }
 
-        public Command nextCommand(int id)
+        public Command nextCommand(int clientId)
         {
             Command cmd;
 
             lock (networkClientsLock)
             {
-                if (networkClients[id].receivedCommands.Count > 0)
+                if (networkClients[clientId].receivedCommands.Count > 0)
                 {
-                    cmd = networkClients[id].receivedCommands[0];
-                    networkClients[id].receivedCommands.RemoveAt(0);
+                    cmd = networkClients[clientId].receivedCommands[0];
+                    networkClients[clientId].receivedCommands.RemoveAt(0);
                 }
                 else
                 {
@@ -251,15 +251,15 @@ namespace NetWolt
             return cmd;
         }
 
-        public void sendCommand(int id, Command cmd)
+        public void sendCommand(int clientId, Command cmd)
         {
             List<byte> bytes = cmd.sendableFormat();
 
             lock (networkClientsLock)
             {
-                if (networkClients.ContainsKey(id))
+                if (networkClients.ContainsKey(clientId))
                 {
-                    networkClients[id].toSendBytes.AddRange(bytes);
+                    networkClients[clientId].toSendBytes.AddRange(bytes);
                 }
             }
         }
