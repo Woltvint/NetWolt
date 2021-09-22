@@ -9,9 +9,9 @@ namespace NetWolt
         private List<object> content;
 
         public bool empty;
-        public bool complete;
-        public bool started;
-        public int cmdLen;
+        internal bool complete;
+        internal bool started;
+        internal int cmdLen;
 
 
         public Command()
@@ -25,7 +25,7 @@ namespace NetWolt
             cmdLen = 0;
         }
 
-        public List<byte> sendableFormat()
+        internal List<byte> sendableFormat()
         {
             List<byte> o = new List<byte>();
 
@@ -93,7 +93,7 @@ namespace NetWolt
             return o;
         }
 
-        public static Command parseCommand(List<byte> bytes)
+        internal static Command parseCommand(List<byte> bytes)
         {
             Command cmd = new Command();
 
@@ -229,17 +229,18 @@ namespace NetWolt
 
         }
 
-        public static byte[] boolToByte(bool input)
+
+        private static byte[] boolToByte(bool input)
         {
             return BitConverter.GetBytes(input);
         }
 
-        public static byte[] shortToByte(short input)
+        private static byte[] shortToByte(short input)
         {
             return BitConverter.GetBytes(input);
         }
 
-        public static byte[] intToByte(int input)
+        private static byte[] intToByte(int input)
         {
             byte[] intBytes = BitConverter.GetBytes(input);
             if (BitConverter.IsLittleEndian)
@@ -247,17 +248,17 @@ namespace NetWolt
             return intBytes;
         }
 
-        public static byte[] charToByte(char input)
+        private static byte[] charToByte(char input)
         {
             return BitConverter.GetBytes(input);
         }
 
-        public static byte[] floatToByte(float input)
+        private static byte[] floatToByte(float input)
         {
             return BitConverter.GetBytes(input);
         }
 
-        public static byte[] stringToByte(string input)
+        private static byte[] stringToByte(string input)
         {
             List<byte> output = new List<byte>();
 
@@ -273,17 +274,17 @@ namespace NetWolt
 
 
 
-        public static bool boolFromByte(byte[] input)
+        private static bool boolFromByte(byte[] input)
         {
             return BitConverter.ToBoolean(input, 0);
         }
 
-        public static short shortFromByte(byte[] input)
+        private static short shortFromByte(byte[] input)
         {
             return BitConverter.ToInt16(input, 0);
         }
 
-        public static int intFromByte(byte[] input)
+        private static int intFromByte(byte[] input)
         {
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(input);
@@ -291,17 +292,17 @@ namespace NetWolt
             return BitConverter.ToInt32(input, 0);
         }
 
-        public static char charFromByte(byte[] input)
+        private static char charFromByte(byte[] input)
         {
             return BitConverter.ToChar(input, 0);
         }
 
-        public static float floatFromByte(byte[] input)
+        private static float floatFromByte(byte[] input)
         {
             return BitConverter.ToSingle(input, 0);
         }
 
-        public static string stringFromByte(int lenght, byte[] input)
+        private static string stringFromByte(int lenght, byte[] input)
         {
             string output = "";
 

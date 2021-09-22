@@ -22,6 +22,9 @@ namespace NetWolt
         private readonly object newClientsLock = new object();
         private List<int> newClients;
 
+        private readonly object disconectedClientsLock = new object();
+        private List<int> disconectedClients;
+
         private Thread serverThread;
 
         public bool debugLog;
@@ -36,6 +39,7 @@ namespace NetWolt
             sockets = new Dictionary<Socket, int>();
 
             newClients = new List<int>();
+            disconectedClients = new List<int>();
 
             serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
@@ -105,6 +109,12 @@ namespace NetWolt
                 {
                     networkClients.Remove(client);
                     sockets.Remove(socket);
+
+                    lock (disconectedClientsLock)
+                    {
+                        disconectedClients.Add(client);
+                    }
+                    
                     log($"Client {client} disconected");
                     return;
                 }
@@ -187,6 +197,16 @@ namespace NetWolt
                 return output;
             }
         }
+        public List<int> getDisconectedClients()
+        {
+            lock (disconectedClientsLock)
+            {
+                List<int> output = disconectedClients;
+                disconectedClients.Clear();
+                return output;
+            }
+        }
+
 
         public List<int> getAllClients()
         {
@@ -240,6 +260,19 @@ namespace NetWolt
                 if (networkClients.ContainsKey(id))
                 {
                     networkClients[id].toSendBytes.AddRange(bytes);
+                }
+            }
+        }
+
+        public void sendCommandToAll(Command cmd)
+        {
+            List<byte> bytes = cmd.sendableFormat();
+
+            lock (networkClientsLock)
+            {
+                foreach (KeyValuePair<int,NetworkClient> client in networkClients)
+                {
+                    client.Value.toSendBytes.AddRange(bytes);
                 }
             }
         }
