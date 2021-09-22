@@ -2,6 +2,11 @@
 
 A simple networking solution for client-server communication
 
+Great for simple games and apps where you dont want to touch the network and just want to send some data and not care about how it gets there
+
+Preatty performant and low overhead in most cases
+
+
 ## Documentation
 [Command](./Docs/Command.md)
 
