@@ -2,6 +2,14 @@
 
 A simple networking solution for client-server communication
 
+## Documentation
+[Command](./Docs/Command.md)
+
+[Server](./Docs/Server.md)
+
+[Client](./Docs/Client.md)
+
+
 ## Setup
 All you need to include for the package to work is the package itself
 
