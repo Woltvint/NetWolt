@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/Woltvint/NetWolt</PackageProjectUrl>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryType>GitHub</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -32,10 +32,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-	  <None Include="..\README.md">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
-	  </None>
+	  <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
