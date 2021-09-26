@@ -62,6 +62,21 @@ Command: \["first"|false|(byte) 0|(byte) 0|(byte) 0|6\]
 a: false
 b: true
 
+### getParameterCount()
+
+- returns an int representing the number of parameters that are set
+
+intended use
+
+```cs
+	cmd.addParameter(10);
+	cmd.addParameter('g');
+	
+	int c = cmd.getParameterCount();
+```
+Command: \[10|'g'\]
+c: 2
+
 ### ToString()
 
 - returns the command and its contents as a string

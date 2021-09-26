@@ -206,7 +206,8 @@ namespace NetWolt
 
         public bool setParameter(int pos, object parameter)
         {
-            empty = false;
+            int count = getParameterCount();
+empty = false;
             if (pos < content.Count)
             {
                 content[pos] = parameter;
@@ -229,6 +230,10 @@ namespace NetWolt
 
         }
 
+        public int getParameterCount()
+        {
+            return content.Count;
+        }
 
         private static byte[] boolToByte(bool input)
         {
