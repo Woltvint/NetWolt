@@ -227,24 +227,28 @@ namespace NetWolt
         {
             lock (networkClients)
             {
-                return networkClients[clientId].receivedCommands.Count > 0;
+                if (networkClients.ContainsKey(clientId))
+                {
+                    return networkClients[clientId].receivedCommands.Count > 0;
+                }
             }
+
+            return false;
         }
 
         public Command nextCommand(int clientId)
         {
-            Command cmd;
+            Command cmd = new Command();
 
             lock (networkClientsLock)
             {
-                if (networkClients[clientId].receivedCommands.Count > 0)
+                if (networkClients.ContainsKey(clientId))
                 {
-                    cmd = networkClients[clientId].receivedCommands[0];
-                    networkClients[clientId].receivedCommands.RemoveAt(0);
-                }
-                else
-                {
-                    cmd = new Command();
+                    if (networkClients[clientId].receivedCommands.Count > 0)
+                    {
+                        cmd = networkClients[clientId].receivedCommands[0];
+                        networkClients[clientId].receivedCommands.RemoveAt(0);
+                    }
                 }
             }
 

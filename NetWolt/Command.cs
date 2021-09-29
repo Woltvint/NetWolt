@@ -181,7 +181,10 @@ namespace NetWolt
                 cmd.cmdLen = bytesRead;
             }
 
-            cmd.empty = false;
+            if (cmd.cmdLen > 0)
+            {
+                cmd.empty = false;
+            }
 
             return cmd;
         }
@@ -206,8 +209,7 @@ namespace NetWolt
 
         public bool setParameter(int pos, object parameter)
         {
-            int count = getParameterCount();
-empty = false;
+            empty = false;
             if (pos < content.Count)
             {
                 content[pos] = parameter;

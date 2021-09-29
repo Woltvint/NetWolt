@@ -19,7 +19,7 @@ namespace NetWolt
         private readonly object toSendBytesLock = new object();
         private List<byte> toSendBytes;
 
-        private byte[] buffer = new byte[1024];
+        private byte[] buffer = new byte[1024*16];
 
         private string _address;
         private int _port;

@@ -21,7 +21,7 @@ namespace NetWolt
         {
             clientSocket = socket;
 
-            buffer = new byte[1024];
+            buffer = new byte[1024*16];
 
             receivedCommands = new List<Command>();
             toSendBytes = new List<byte>();
