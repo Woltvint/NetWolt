@@ -86,8 +86,12 @@ namespace NetWolt
                     break;
                 }
 
-                receivedCommands.Add(cmd);
-                receivedBytes.RemoveRange(0, cmd.cmdLen);
+                lock (receivedCommandsLock)
+                {
+                    receivedCommands.Add(cmd);
+                    receivedBytes.RemoveRange(0, cmd.cmdLen);
+                }
+                
                 commands++;
             }
 
@@ -121,21 +125,24 @@ namespace NetWolt
                     continue;
                 }
 
-                if (toSendBytes.Count > 0)
+                lock (toSendBytesLock)
                 {
-                    log($"Attempting to send {toSendBytes.Count} bytes");
-
-                    try
+                    if (toSendBytes.Count > 0)
                     {
-                        clientSocket.BeginSend(toSendBytes.ToArray(), 0, toSendBytes.Count, SocketFlags.None, sendCallBack, clientSocket);
-                        toSendBytes.Clear();
-                        log("Command sent");
-                    }
-                    catch (Exception)
-                    {
-                        log("Command sending failed");
-                    }
+                        log($"Attempting to send {toSendBytes.Count} bytes");
 
+                        try
+                        {
+                            clientSocket.BeginSend(toSendBytes.ToArray(), 0, toSendBytes.Count, SocketFlags.None, sendCallBack, clientSocket);
+                            toSendBytes.Clear();
+                            log("Command sent");
+                        }
+                        catch (Exception)
+                        {
+                            log("Command sending failed");
+                        }
+
+                    }
                 }
 
             }
