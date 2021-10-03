@@ -6,13 +6,13 @@
     <Product>NetWolt</Product>
     <Description>An easy to use client-server networking package with all of the networking stuff abstracted away into a simple sendable command structure. Great for small games and small apps.</Description>
     <Copyright></Copyright>
-    <PackageTags>server;client;network;networking;tcp;easy;open;socket;simple;message;net;MIT license</PackageTags>
+    <PackageTags>server;client;network;networking;tcp;easy;open;socket;simple;message;net;MIT</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Woltvint/NetWolt</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Woltvint/NetWolt</PackageProjectUrl>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
     <PackageIcon>logo.png</PackageIcon>
     <RepositoryType>GitHub</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -32,7 +32,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-	  <None Include="..\README.md" Pack="true" PackagePath="\" />
+	  <None Include="..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

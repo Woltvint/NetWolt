@@ -192,7 +192,8 @@ namespace NetWolt
         {
             lock (newClientsLock)
             {
-                List<int> output = newClients;
+                List<int> output = new List<int>();
+                output.AddRange(newClients);
                 newClients.Clear();
                 return output;
             }
@@ -201,7 +202,8 @@ namespace NetWolt
         {
             lock (disconectedClientsLock)
             {
-                List<int> output = disconectedClients;
+                List<int> output = new List<int>();
+                output.AddRange(disconectedClients);
                 disconectedClients.Clear();
                 return output;
             }
